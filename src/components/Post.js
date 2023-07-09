@@ -1,13 +1,25 @@
 import React from "react";
 import { formatDistanceToNow } from "date-fns";
 import { tr } from "date-fns/locale";
+import { useDispatch } from "react-redux";
+import { notSil } from "../actions";
+import { toast } from "react-toastify";
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Post({ item }) {
-
+  const notify = () => toast("Wow so easy!");
+const dispatch=useDispatch();
   function handleSil() {
+
     // burada ilgili eylemi dispatch edin
     // sonra toast mesajı gösterin
-  }
+      dispatch(notSil(item.id));
+  
+  toast.info("Notunuz silindi")
+}
+    
+  
 
   return (
     <div className="beyazKutu p-8 pb-6 mb-4 text-sm">

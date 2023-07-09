@@ -1,6 +1,8 @@
+import { NOT_EKLE, NOT_SIL } from "./actions";
+
 const s10chLocalStorageKey = "s10ch";
 
-const baslangicDegerleri = {
+let baslangicDegerleri = {
   notlar: [
     {
       id: "75g1IyB8JLehAr0Lr5v3p",
@@ -27,3 +29,29 @@ function baslangicNotlariniGetir(key) {
     return baslangicDegerleri
   }
 }
+baslangicDegerleri.notlar=baslangicNotlariniGetir("s10challange")
+const reducer=(state=baslangicDegerleri,action)=>{
+console.log(baslangicNotlariniGetir("s10challange"));
+
+  switch(action.type){
+
+    case NOT_EKLE:
+      localStorage.setItem("s10challange", JSON.stringify([...state.notlar,action.payload]));
+
+
+    return{
+      ...state,
+      notlar:[...state.notlar,action.payload]
+    }
+    case NOT_SIL:
+     let arr=state.notlar.filter(item=>item.id!=action.payload)
+    return{
+      ...state,
+      notlar:arr
+    }
+
+    default:
+      return state;
+  }
+}
+export default reducer;
